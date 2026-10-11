@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Free Claude Code: 2 Repos Setup Guide | Unnati Tripathi (@aiwithunnati)</title>
+<meta name="author" content="Unnati Tripathi">
+<meta name="description" content="Run Claude Code with free models. Two GitHub repos, full install and setup steps, copy-paste commands. By Unnati Tripathi (@aiwithunnati).">
+<meta property="og:title" content="Free Claude Code: 2 Repos Setup Guide">
+<meta property="og:description" content="Copy-paste setup for both Free Claude Code repos. By Unnati Tripathi (@aiwithunnati).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#D9291C;
+  --cream:#F4EDE2;
+  --cream-2:#EADFCD;
+  --black:#141210;
+  --ink:#2A2622;
+  --muted:#6B625A;
+  --code-bg:#141210;
+  --code-ink:#F4EDE2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom,0px)}
+a{color:var(--red)}
+.wrap{max-width:860px;margin:0 auto;padding:0 22px}
+
+/* top bar */
+.topbar{background:var(--black);color:var(--cream);font-size:13.5px}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:12px;padding-bottom:12px;flex-wrap:wrap}
+.topbar strong{font-weight:700}
+.topbar a{color:var(--cream);text-decoration:none;border-bottom:1px solid var(--red)}
+
+/* hero */
+.hero{padding:64px 0 48px;border-bottom:3px solid var(--black)}
+.pill{display:inline-block;background:var(--red);color:var(--cream);font-weight:700;font-size:14px;padding:6px 14px;border-radius:999px;margin-bottom:22px}
+h1{font-family:'Anton',Impact,'Arial Narrow',sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(56px,13vw,124px);line-height:.92;color:var(--black);letter-spacing:.5px}
+h1 .red{color:var(--red);display:block}
+.lede{font-size:20px;max-width:640px;margin-top:24px;color:var(--ink)}
+.disclaimer{font-size:14px;color:var(--muted);margin-top:18px;font-style:italic;max-width:640px}
+
+/* repo cards */
+.repos{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px}
+.repo{background:var(--black);color:var(--cream);padding:26px 24px 24px;border-radius:14px;display:flex;flex-direction:column}
+.repo .num{font-family:'Anton',Impact,sans-serif;font-size:44px;color:var(--red);line-height:1}
+.repo h3{font-family:'Anton',Impact,sans-serif;font-weight:400;font-size:26px;text-transform:uppercase;letter-spacing:.5px;margin:10px 0 4px;word-break:break-word}
+.repo .owner{font-size:14px;color:#BFB4A6;margin-bottom:14px}
+.repo ul{list-style:none;font-size:15px;margin-bottom:22px;flex:1}
+.repo li{padding:6px 0;border-top:1px solid #2F2A25}
+.repo li:first-child{border-top:none}
+.btn{display:inline-block;background:var(--red);color:var(--cream);text-decoration:none;font-weight:700;padding:12px 18px;border-radius:10px;text-align:center;font-size:15px}
+.btn:hover{background:#B8200F}
+.btn:focus-visible,.copy:focus-visible,.tab:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+
+/* sections */
+section{padding:56px 0;border-bottom:3px solid var(--black)}
+h2{font-family:'Anton',Impact,'Arial Narrow',sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(38px,7vw,60px);line-height:1;color:var(--black);margin-bottom:10px}
+.sub{color:var(--muted);margin-bottom:30px;max-width:640px}
+.repo-head{display:flex;align-items:flex-start;gap:18px;margin-bottom:8px}
+.repo-head .big{font-family:'Anton',Impact,sans-serif;font-size:84px;line-height:.85;color:var(--red)}
+.linkline{background:var(--cream-2);border-left:5px solid var(--red);padding:14px 18px;border-radius:0 10px 10px 0;margin:4px 0 34px;font-size:15.5px;word-break:break-all}
+.linkline a{font-weight:700}
+
+.step{display:grid;grid-template-columns:52px 1fr;gap:16px;margin-bottom:34px}
+.step .n{font-family:'Anton',Impact,sans-serif;font-size:22px;width:52px;height:52px;border-radius:50%;background:var(--black);color:var(--cream);display:flex;align-items:center;justify-content:center}
+.step h4{font-size:21px;font-weight:700;color:var(--black);margin:10px 0 6px}
+.step p{margin-bottom:10px}
+.step ol{margin:6px 0 12px 20px}
+.step ol li{margin-bottom:4px}
+.label{font-weight:700;font-size:14px;color:var(--black);margin:14px 0 6px}
+
+/* code */
+.code{position:relative;background:var(--code-bg);border-radius:12px;margin:6px 0 12px}
+.code pre{overflow-x:auto;padding:18px 18px;padding-right:86px;color:var(--code-ink);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.6;white-space:pre}
+.copy{position:absolute;top:10px;right:10px;background:var(--red);color:var(--cream);border:none;font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;padding:7px 12px;border-radius:8px;cursor:pointer}
+.copy.done{background:var(--cream);color:var(--black)}
+code.inline{background:var(--cream-2);padding:2px 6px;border-radius:5px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;color:var(--black)}
+
+.note{background:var(--black);color:var(--cream);border-radius:12px;padding:18px 20px;margin:8px 0 14px;font-size:15.5px}
+.note strong{color:#FF6B5E}
+
+/* tabs */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 10px}
+.tab{background:transparent;border:2px solid var(--black);color:var(--black);font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;padding:7px 14px;border-radius:999px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--black);color:var(--cream)}
+.panel[hidden]{display:none}
+
+.cta-end{margin-top:10px}
+
+/* footer */
+footer{background:var(--black);color:var(--cream);padding:46px 0 40px}
+footer .name{font-family:'Anton',Impact,sans-serif;font-size:34px;text-transform:uppercase;letter-spacing:.5px}
+footer .title{color:#BFB4A6;margin:4px 0 14px;font-size:15px}
+footer a{color:var(--cream);font-weight:700;text-decoration:none;border-bottom:2px solid var(--red)}
+footer .copyright{margin-top:26px;font-size:13.5px;color:#BFB4A6;border-top:1px solid #2F2A25;padding-top:18px}
+footer .fine{font-size:12.5px;color:#8E8378;margin-top:8px}
+
+@media (max-width:680px){
+  body{font-size:16px}
+  .repos{grid-template-columns:1fr}
+  .step{grid-template-columns:40px 1fr;gap:12px}
+  .step .n{width:40px;height:40px;font-size:18px}
+  .step h4{margin-top:6px;font-size:19px}
+  .repo-head .big{font-size:60px}
+  .code pre{font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span><strong>Unnati Tripathi</strong> · CEO &amp; Co-Founder, Maester Labs</span>
+    <a href="https://instagram.com/aiwithunnati" target="_blank" rel="noopener">@aiwithunnati</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="pill">2 GitHub repos · copy-paste setup</span>
+    <h1>Free Claude Code <span class="red">2 Repos</span></h1>
+    <p class="lede">Run Claude Code with free models like NVIDIA NIM, OpenRouter, or fully local ones. No Anthropic API key needed. Both repos are below with their links, full setup, and every command ready to copy.</p>
+    <p class="disclaimer">Both are independent open-source projects. They are not affiliated with or endorsed by Anthropic. Claude and Claude Code are trademarks of Anthropic. Free-tier limits are set by each provider and can change.</p>
+
+    <div class="repos">
+      <div class="repo">
+        <div class="num">1</div>
+        <h3>free-claude-code</h3>
+        <div class="owner">by Alishahryar1 · the original</div>
+        <ul>
+          <li>56K+ stars, actively updated</li>
+          <li>59 providers, 1.3B+ free tokens a month</li>
+          <li>One-line installer + Admin UI</li>
+          <li>Works with Claude Code, Codex, VS Code and more</li>
+        </ul>
+        <a class="btn" href="https://github.com/Alishahryar1/free-claude-code" target="_blank" rel="noopener">Visit repo on GitHub</a>
+      </div>
+      <div class="repo">
+        <div class="num">2</div>
+        <h3>free-claude-code</h3>
+        <div class="owner">by codeaashu · the lightweight version</div>
+        <ul>
+          <li>Simple proxy, MIT licence</li>
+          <li>5 providers: NVIDIA NIM, OpenRouter, DeepSeek, LM Studio, llama.cpp</li>
+          <li>Manual setup with a .env file</li>
+          <li>Claude Code CLI + VS Code</li>
+        </ul>
+        <a class="btn" href="https://github.com/codeaashu/free-claude-code" target="_blank" rel="noopener">Visit repo on GitHub</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- BEFORE YOU START -->
+<section id="before">
+  <div class="wrap">
+    <h2>Before you start</h2>
+    <p class="sub">You need these two things for both repos.</p>
+
+    <div class="step">
+      <div class="n">1</div>
+      <div>
+        <h4>Get a free NVIDIA NIM API key</h4>
+        <p>NVIDIA NIM gives you 40 requests a minute for free. Sign in and create a key here:</p>
+        <div class="linkline"><a href="https://build.nvidia.com/settings/api-keys" target="_blank" rel="noopener">build.nvidia.com/settings/api-keys</a></div>
+        <p>Your key starts with <code class="inline">nvapi-</code>. Keep it private.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">2</div>
+      <div>
+        <h4>Install Claude Code</h4>
+        <p>Needs Node.js installed. Skip this if you already have Claude Code.</p>
+        <div class="code"><pre>npm install -g @anthropic-ai/claude-code</pre><button class="copy">Copy</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REPO 1 -->
+<section id="repo1">
+  <div class="wrap">
+    <div class="repo-head">
+      <div class="big">1</div>
+      <div>
+        <h2>Alishahryar1 / free-claude-code</h2>
+        <p class="sub" style="margin-bottom:0">The original project. Easiest setup: one installer, then everything is done from a browser dashboard.</p>
+      </div>
+    </div>
+    <div class="linkline">Repo: <a href="https://github.com/Alishahryar1/free-claude-code" target="_blank" rel="noopener">github.com/Alishahryar1/free-claude-code</a></div>
+
+    <div class="step">
+      <div class="n">1</div>
+      <div>
+        <h4>Run the installer</h4>
+        <p>Pick your system. When it asks, choose at least one coding agent (pick Claude Code).</p>
+        <div class="tabs" role="tablist">
+          <button class="tab" role="tab" aria-selected="true" data-group="r1i" data-target="r1i-mac">macOS / Linux</button>
+          <button class="tab" role="tab" aria-selected="false" data-group="r1i" data-target="r1i-win">Windows</button>
+        </div>
+        <div class="panel" id="r1i-mac" data-group="r1i">
+          <div class="code"><pre>curl -fsSL "https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.sh" | sh</pre><button class="copy">Copy</button></div>
+        </div>
+        <div class="panel" id="r1i-win" data-group="r1i" hidden>
+          <p class="label">Paste into Windows PowerShell</p>
+          <div class="code"><pre>&amp; ([scriptblock]::Create((irm "https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.ps1")))</pre><button class="copy">Copy</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">2</div>
+      <div>
+        <h4>Start Free Claude Code</h4>
+        <p><strong>Windows:</strong> open <strong>Free Claude Code</strong> from your desktop or Start menu.<br>
+        <strong>macOS:</strong> open <strong>Free Claude Code</strong> from your desktop or Applications folder.<br>
+        <strong>Linux:</strong> run this and keep the terminal open:</p>
+        <div class="code"><pre>fcc-server</pre><button class="copy">Copy</button></div>
+        <p>The Admin UI opens in your browser once it starts.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">3</div>
+      <div>
+        <h4>Add your NVIDIA key in the Admin UI</h4>
+        <ol>
+          <li>Open the Admin UI.</li>
+          <li>Paste your key into <code class="inline">NVIDIA_NIM_API_KEY</code>.</li>
+          <li>Leave <code class="inline">MODEL</code> on the default, or search the dropdown for another model.</li>
+          <li>Click <strong>Apply</strong>.</li>
+        </ol>
+        <p>The default model is:</p>
+        <div class="code"><pre>nvidia_nim/nvidia/nemotron-3-super-120b-a12b</pre><button class="copy">Copy</button></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">4</div>
+      <div>
+        <h4>Launch Claude Code</h4>
+        <p>Open a new terminal and run:</p>
+        <div class="code"><pre>fcc-claude</pre><button class="copy">Copy</button></div>
+        <p>That's it. Claude Code now runs on your free model. Use <code class="inline">/model</code> inside Claude Code to switch models.</p>
+        <p class="label">Using a different agent? Same idea:</p>
+        <div class="code"><pre>fcc-codex      # Codex
+fcc-opencode   # OpenCode
+fcc-cline      # Cline
+fcc-aider      # Aider</pre><button class="copy">Copy</button></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">5</div>
+      <div>
+        <h4>Optional: use it inside VS Code</h4>
+        <ol>
+          <li>Install the Claude Code extension in VS Code.</li>
+          <li>Start Free Claude Code.</li>
+          <li>In the Admin UI, go to <strong>Integrations</strong> and click <strong>Connect</strong> on the Claude Code in VS Code card.</li>
+          <li>Reload VS Code.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">6</div>
+      <div>
+        <h4>Keep it updated</h4>
+        <p>Stop any running FCC commands first, then:</p>
+        <div class="code"><pre>fcc-update</pre><button class="copy">Copy</button></div>
+        <p>Something not working? This prints a report you can paste into a GitHub issue:</p>
+        <div class="code"><pre>fcc-doctor</pre><button class="copy">Copy</button></div>
+      </div>
+    </div>
+
+    <div class="cta-end"><a class="btn" href="https://github.com/Alishahryar1/free-claude-code" target="_blank" rel="noopener">Open Repo 1 on GitHub</a></div>
+  </div>
+</section>
+
+<!-- REPO 2 -->
+<section id="repo2">
+  <div class="wrap">
+    <div class="repo-head">
+      <div class="big">2</div>
+      <div>
+        <h2>codeaashu / free-claude-code</h2>
+        <p class="sub" style="margin-bottom:0">The lightweight version. You run the proxy yourself in one terminal and Claude Code in another.</p>
+      </div>
+    </div>
+    <div class="linkline">Repo: <a href="https://github.com/codeaashu/free-claude-code" target="_blank" rel="noopener">github.com/codeaashu/free-claude-code</a></div>
+
+    <div class="step">
+      <div class="n">1</div>
+      <div>
+        <h4>Install uv</h4>
+        <p>uv is the Python tool this project runs on.</p>
+        <div class="code"><pre>pip install uv</pre><button class="copy">Copy</button></div>
+        <p>Already have uv? Update it instead:</p>
+        <div class="code"><pre>uv self update</pre><button class="copy">Copy</button></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">2</div>
+      <div>
+        <h4>Clone the repo</h4>
+        <div class="code"><pre>git clone https://github.com/codeaashu/free-claude-code.git
+cd free-claude-code</pre><button class="copy">Copy</button></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">3</div>
+      <div>
+        <h4>Create your .env file</h4>
+        <p>Create a file named <code class="inline">.env</code> inside the <code class="inline">free-claude-code</code> folder and paste one of these. Replace the key with your own.</p>
+        <div class="tabs" role="tablist">
+          <button class="tab" role="tab" aria-selected="true" data-group="r2e" data-target="r2e-nim">NVIDIA NIM (recommended)</button>
+          <button class="tab" role="tab" aria-selected="false" data-group="r2e" data-target="r2e-or">OpenRouter</button>
+          <button class="tab" role="tab" aria-selected="false" data-group="r2e" data-target="r2e-lm">LM Studio (local)</button>
+        </div>
+        <div class="panel" id="r2e-nim" data-group="r2e">
+          <div class="code"><pre>NVIDIA_NIM_API_KEY="nvapi-your-key-here"
+
+MODEL_OPUS=
+MODEL_SONNET=
+MODEL_HAIKU=
+MODEL="nvidia_nim/z-ai/glm4.7"
+
+ENABLE_THINKING=true</pre><button class="copy">Copy</button></div>
+        </div>
+        <div class="panel" id="r2e-or" data-group="r2e" hidden>
+          <p>Get a key at <a href="https://openrouter.ai/keys" target="_blank" rel="noopener">openrouter.ai/keys</a>.</p>
+          <div class="code"><pre>OPENROUTER_API_KEY="sk-or-your-key-here"
+
+MODEL_OPUS="open_router/deepseek/deepseek-r1-0528:free"
+MODEL_SONNET="open_router/openai/gpt-oss-120b:free"
+MODEL_HAIKU="open_router/stepfun/step-3.5-flash:free"
+MODEL="open_router/stepfun/step-3.5-flash:free"</pre><button class="copy">Copy</button></div>
+        </div>
+        <div class="panel" id="r2e-lm" data-group="r2e" hidden>
+          <p>No key needed. Start LM Studio's local server and load a model first.</p>
+          <div class="code"><pre>MODEL_OPUS="lmstudio/unsloth/MiniMax-M2.5-GGUF"
+MODEL_SONNET="lmstudio/unsloth/Qwen3.5-35B-A3B-GGUF"
+MODEL_HAIKU="lmstudio/unsloth/GLM-4.7-Flash-GGUF"
+MODEL="lmstudio/unsloth/GLM-4.7-Flash-GGUF"</pre><button class="copy">Copy</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">4</div>
+      <div>
+        <h4>Terminal 1: start the proxy</h4>
+        <div class="code"><pre>uv run uvicorn server:app --host 0.0.0.0 --port 8082</pre><button class="copy">Copy</button></div>
+        <p>Leave this terminal running.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">5</div>
+      <div>
+        <h4>Terminal 2: run Claude Code through the proxy</h4>
+        <div class="tabs" role="tablist">
+          <button class="tab" role="tab" aria-selected="true" data-group="r2r" data-target="r2r-bash">macOS / Linux</button>
+          <button class="tab" role="tab" aria-selected="false" data-group="r2r" data-target="r2r-ps">Windows PowerShell</button>
+        </div>
+        <div class="panel" id="r2r-bash" data-group="r2r">
+          <div class="code"><pre>ANTHROPIC_AUTH_TOKEN="freecc" ANTHROPIC_BASE_URL="http://localhost:8082" claude</pre><button class="copy">Copy</button></div>
+        </div>
+        <div class="panel" id="r2r-ps" data-group="r2r" hidden>
+          <div class="code"><pre>$env:ANTHROPIC_AUTH_TOKEN="freecc"; $env:ANTHROPIC_BASE_URL="http://localhost:8082"; claude</pre><button class="copy">Copy</button></div>
+        </div>
+        <div class="note"><strong>Tip:</strong> use <code class="inline" style="background:#2F2A25;color:var(--cream)">http://localhost:8082</code> exactly. Don't add <code class="inline" style="background:#2F2A25;color:var(--cream)">/v1</code> at the end.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="n">6</div>
+      <div>
+        <h4>Optional: use it inside VS Code</h4>
+        <ol>
+          <li>Keep the proxy running from step 4.</li>
+          <li>Open VS Code settings (<code class="inline">Ctrl + ,</code> or <code class="inline">Cmd + ,</code>) and search <code class="inline">claude-code.environmentVariables</code>.</li>
+          <li>Click <strong>Edit in settings.json</strong> and add this:</li>
+        </ol>
+        <div class="code"><pre>"claudeCode.environmentVariables": [
+  { "name": "ANTHROPIC_BASE_URL", "value": "http://localhost:8082" },
+  { "name": "ANTHROPIC_AUTH_TOKEN", "value": "freecc" }
+]</pre><button class="copy">Copy</button></div>
+        <p>Reload extensions. If a login screen shows up, click <strong>Anthropic Console</strong> and authorise. It works even if it then asks you to buy credits, so you can ignore that. To go back to normal Claude, remove this block and reload.</p>
+      </div>
+    </div>
+
+    <div class="cta-end"><a class="btn" href="https://github.com/codeaashu/free-claude-code" target="_blank" rel="noopener">Open Repo 2 on GitHub</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="name">Unnati Tripathi</div>
+    <div class="title">AI Educator &amp; Content Creator · CEO &amp; Co-Founder, Maester Labs</div>
+    <a href="https://instagram.com/aiwithunnati" target="_blank" rel="noopener">Follow @aiwithunnati on Instagram</a>
+    <div class="copyright">© 2026 Unnati Tripathi. All rights reserved.</div>
+    <div class="fine">Repos belong to their respective authors. Not affiliated with or endorsed by Anthropic.</div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var text = btn.parentElement.querySelector('pre').innerText;
+    var done = function(){
+      btn.textContent = 'Copied';
+      btn.classList.add('done');
+      setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(text); done(); });
+    } else { fallback(text); done(); }
+  });
+});
+function fallback(text){
+  var ta = document.createElement('textarea');
+  ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  document.body.removeChild(ta);
+}
+document.querySelectorAll('.tab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    var group = tab.dataset.group;
+    document.querySelectorAll('.tab[data-group="'+group+'"]').forEach(function(t){ t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+    document.querySelectorAll('.panel[data-group="'+group+'"]').forEach(function(p){ p.hidden = p.id !== tab.dataset.target; });
+  });
+});
+</script>
+</body>
+</html>
